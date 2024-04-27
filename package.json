@@ -1,11 +1,23 @@
 {
   "name": "primes",
-  "module": "index.ts",
   "type": "module",
+  "module": "./index.js",
+  "scripts": {
+    "dev": "bun run --watch ./index.ts"
+  },
   "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
     "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/static": "^1.0.3",
+    "elysia": "latest",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.0",
+    "recharts": "^2.12.6"
   }
 }
