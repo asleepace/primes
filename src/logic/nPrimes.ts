@@ -15,7 +15,6 @@ export function* nPrimes(n: bigint) {
       primeProduct *= currentIndex
       numberToFind -= 1n
       yield currentIndex
-      console.log(`[primes] found (${numberToFind}/${n})`)
     }
     // skip even numbers
     currentIndex += 2n

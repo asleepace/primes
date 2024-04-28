@@ -29199,6 +29199,7 @@ _defineProperty3(Legend, "defaultProps", {
   align: "center",
   verticalAlign: "bottom"
 });
+
 // node_modules/recharts/es6/component/Tooltip.js
 var import_react10 = __toESM(require_react(), 1);
 var _typeof9 = function(o) {
@@ -47544,36 +47545,57 @@ var LineChart = generateCategoricalChart({
 });
 // src/components/graph.tsx
 var import_react45 = __toESM(require_react(), 1);
-function Graph({ data, width, height }) {
+function Graph({ data, width, height, interval: interval9, dataKey }) {
   return import_react45.default.createElement(ResponsiveContainer, {
     width,
     height
   }, import_react45.default.createElement(LineChart, {
     data
   }, import_react45.default.createElement(CartesianGrid, {
-    strokeDasharray: "3 3"
+    stroke: "rgba(255, 255, 255, 0.1)",
+    strokeDasharray: "10 10"
   }), import_react45.default.createElement(XAxis, {
+    interval: interval9,
     dataKey: "name"
-  }), import_react45.default.createElement(YAxis, null), import_react45.default.createElement(Tooltip, null), import_react45.default.createElement(Legend, null), import_react45.default.createElement(Line, {
+  }), import_react45.default.createElement(YAxis, {
+    interval: interval9
+  }), import_react45.default.createElement(Tooltip, null), import_react45.default.createElement(Line, {
     type: "monotone",
-    dataKey: "pv",
+    dataKey,
     stroke: "#8884d8"
-  }), import_react45.default.createElement(Line, {
-    type: "monotone",
-    dataKey: "uv",
-    stroke: "#82ca9d"
   })));
 }
 
+// src/logic/gcd.ts
+function gcd(a2, b) {
+  return b === 0n ? a2 : gcd(b, a2 % b);
+}
+
+// src/logic/nPrimes.ts
+function* nPrimes(n) {
+  yield 2n;
+  yield 3n;
+  let numberToFind = n - 2n;
+  let primeProduct = 6n;
+  let currentIndex = 3n;
+  while (numberToFind > 0n) {
+    if (gcd(primeProduct, currentIndex) === 1n) {
+      primeProduct *= currentIndex;
+      numberToFind -= 1n;
+      yield currentIndex;
+    }
+    currentIndex += 2n;
+  }
+}
+
 // src/App.tsx
-var data = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29].map((n, i) => ({
-  name: i,
-  pv: n,
-  uv: n * 2
+var primes = [...nPrimes(1000n)].map((n, i) => ({
+  index: i,
+  prime: Number(n)
 }));
 function App() {
   return import_react46.default.createElement("html", {
-    style: { width: "100%", height: "100vh", backgroundColor: "black" }
+    style: styles.root
   }, import_react46.default.createElement("head", null, import_react46.default.createElement("meta", {
     charSet: "utf-8"
   }), import_react46.default.createElement("title", null, "Graphs"), import_react46.default.createElement("meta", {
@@ -47583,14 +47605,26 @@ function App() {
     name: "viewport",
     content: "width=device-width, initial-scale=1"
   })), import_react46.default.createElement("body", {
-    style: { width: "100%", height: "100vh", margin: 0 }
-  }, import_react46.default.createElement("div", {
-    id: "root",
-    style: { width: "100%", height: "100%", backgroundColor: "black" }
+    style: styles.container
   }, import_react46.default.createElement(Graph, {
-    data
-  }))));
+    dataKey: "prime",
+    data: primes,
+    interval: 25
+  })));
 }
+var styles = Object.freeze({
+  container: {
+    width: "100%",
+    height: "100vh",
+    backgroundColor: "black",
+    margin: 0
+  },
+  root: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black"
+  }
+});
 
 // src/html/index.tsx
 client.hydrateRoot(document, import_react47.default.createElement(App, null));
