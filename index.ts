@@ -1,8 +1,8 @@
 import { Elysia } from "elysia";
 import { staticPlugin } from '@elysiajs/static'
-import { renderToReadableStream } from 'react-dom/server.browser'
+import { renderToReadableStream} from 'react-dom/server.browser'
 import { createElement } from "react";
-import App from './src/App'
+import App from './src/App.js'
 
 // bundle client side code
 await Bun.build({

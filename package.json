@@ -1,7 +1,7 @@
 {
   "name": "primes",
   "type": "module",
-  "module": "./index.js",
+  "module": "./index.ts",
   "scripts": {
     "dev": "bun run --watch ./index.ts"
   },

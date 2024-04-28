@@ -1,4 +1,4 @@
-import { gcd } from './gcd'
+import { gcd } from './gcd.js'
 
 /**
  * Calculates the first n prime numbers using the prime product method.
